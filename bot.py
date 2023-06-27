@@ -2,7 +2,7 @@ import os
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ContentTypes
 from dotenv import load_dotenv
-from main import BotText
+from main import Botrecord
 
 load_dotenv()
 
@@ -14,7 +14,7 @@ dp = Dispatcher(bot)
 async def send_welcome(message: types.Message):
     kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     kb.add(KeyboardButton('/help - Instruction'))
-    await message.answer(text=BotText().text_welcome(), reply_markup=kb)
+    await message.answer(text=Botrecord().text_welcome(), reply_markup=kb)
 
 @dp.message_handler(commands=['help'])
 async def send_help(message: types.Message):
@@ -24,17 +24,16 @@ async def send_help(message: types.Message):
 async def send_language(message: types.Message):
     pass
 
-@dp.message_handler(content_types=['voice'])
-async def send_audio(message: types.Message):
+@dp.message_handler(commands=['bot'])
+async def send_bot(message: types.Message):
     pass
 
-@dp.message_handler(content_types=['photo'])
-async def send_photo(message: types.Message):
-    pass
-
-@dp.message_handler(content_types=['text'])
+@dp.message_handler(content_types=['text','voice','audio'])
 async def send_text(message: types.Message):
-    pass
+    if message.content_type == "text":
+        pass
+    elif message.content_type == "voice" and message.content_type == "audio":
+        pass
 
 @dp.message_handler(content_types=ContentTypes.ANY)
 async def send_all(message: types.Message):
