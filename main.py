@@ -14,7 +14,7 @@ class Connect:
 
 class Botrecord:
     def text_welcome(self):
-        with open("/Users/ajbekisaev/Desktop/dungeon_master/telegram_bot/bot_gpt_hackathon/text_bot/text_welcome.tex", "r") as f:
+        with open("~/text_bot/text_welcome.tex", "r") as f:
             self.start_text = f.read()
         return self.start_text
     # try:
