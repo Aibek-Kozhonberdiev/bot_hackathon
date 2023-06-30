@@ -1,7 +1,9 @@
+# Libraries Imported
 import datetime
 import psycopg2
 from bot_create import connect
 
+# This class is responsible for establishing a connection to the PostgreSQL database using the provided connection details.
 class Sql_connect:
     def __init__(self):
         self.connection = psycopg2.connect(
@@ -11,9 +13,10 @@ class Sql_connect:
             database=connect['database']   
         )
 
+# It retrieves the user's information from the message object and inserts it into the users table in the database.
 class Sql_data(Sql_connect):
     def __init__(self, message):
-        super().__init__()  # Вызов конструктора родительского класса
+        super().__init__()  # Calling the constructor of the outgoing class
         self.date = datetime.datetime.now().date()
         self.first_name = message.from_user.first_name
         self.last_name = message.from_user.last_name
@@ -34,10 +37,11 @@ class Sql_data(Sql_connect):
             if self.connection:
                 self.connection.close()
                 print("[INFO] PostgreSQL connection closed")
-
+                
+# It updates the user language field in the users table for a specific user identified by their user_id.
 class User_language(Sql_connect):
     def __init__(self, user_id: str, new_language: str):
-        super().__init__()
+        super().__init__() # Calling the constructor of the outgoing class
         self.user_id = user_id
         self.new_language = new_language
 
@@ -61,7 +65,8 @@ class User_language(Sql_connect):
                 self.connection.close()
                 print("PostgreSQL connection closed")
 
-class Conclusion(Sql_connect):
+# It retrieves all records from the users table and returns the formatted result.
+class Conclusion(Sql_connect): # Calling the constructor of the outgoing class
     def result(self):
         try:
             cursor = self.connection.cursor()
@@ -84,9 +89,10 @@ class Conclusion(Sql_connect):
                 self.connection.close()
                 print("[INFO] PostgreSQL connection closed") 
         
+# It retrieves the user's preferred language from the users table and fetches the corresponding translated text .
 class ResultText(Sql_connect):
     def __init__(self, user_id: int, text: str):
-        super().__init__()
+        super().__init__() # Calling the constructor of the outgoing class
         self.user_id = user_id
         self.text = text
 
