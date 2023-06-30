@@ -84,19 +84,26 @@ class Conclusion(Sql_connect):
                 self.connection.close()
                 print("[INFO] PostgreSQL connection closed") 
         
-class Result_text(Sql_connect):
+class ResultText(Sql_connect):
     def __init__(self, user_id: int, text: str):
         super().__init__()
         self.user_id = user_id
         self.text = text
+
     def lang_text(self):
         try:
+            lang = self.get_user_language()
             cursor = self.connection.cursor()
-            postgreSQL_select_Query = f"SELECT user_language FROM users WHERE id_telegram = {self.user_id};"
+            postgreSQL_select_Query = f"""
+            SELECT value
+            FROM translations
+            WHERE language_code = '{lang}'
+            AND key = '{self.text}';
+            """
 
             cursor.execute(postgreSQL_select_Query)
             mobile_records = cursor.fetchall()
-        
+
             print("[INFO] Output of each article and its columns")
             return mobile_records[0][0]
 
@@ -106,25 +113,25 @@ class Result_text(Sql_connect):
             if self.connection:
                 cursor.close()
                 self.connection.close()
-                print("[INFO] PostgreSQL connection closed")       
-    def lang(self):
+                print("[INFO] PostgreSQL connection closed")
+
+    def get_user_language(self):
         try:
             cursor = self.connection.cursor()
-            postgreSQL_select_Query = f"SELECT user_language FROM users WHERE id_telegram = {self.user_id};"
+            postgreSQL_select_Query = f"""
+            SELECT user_language
+            FROM users
+            WHERE id_telegram = {self.user_id};
+            """
 
             cursor.execute(postgreSQL_select_Query)
             mobile_records = cursor.fetchall()
-        
+
             print("[INFO] Output of each article and its columns")
             return mobile_records[0][0]
 
         except (psycopg2.Error) as error:
             print("[INFO] Error while working with PostgreSQL:", error)
         finally:
-            if self.connection:
+            if cursor:
                 cursor.close()
-                self.connection.close()
-                print("[INFO] PostgreSQL connection closed") 
-
-# a = Result_text(2036864769)
-# print(a.result())

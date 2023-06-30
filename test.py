@@ -1,70 +1,48 @@
-# import unittest
-# from main import *
-# # Здесь будет unittest
+import unittest
+from unittest.mock import MagicMock
+from sql_data import ResultText
 
-# import psycopg2
+class ResultTextTest(unittest.TestCase):
+    def setUp(self):
+        self.result_text = ResultText('int', "instruction")
 
-# try:
-#     # connect to exist database
-#     connection = psycopg2.connect(
-#         host=os.getenv('host'),
-#         user=os.getenv('user'),
-#         password=os.getenv('password'),
-#         database=os.getenv('db_name')   
-#     )
-#     connection.autocommit = True
-    
-#     # the cursor for perfoming database operations
-#     # cursor = connection.cursor()
-    
-#     with connection.cursor() as cursor:
-#         cursor.execute(
-#             "SELECT version();"
-#         )
-        
-#         print(f"Server version: {cursor.fetchone()}")
-        
-#     # create a new table
-#     # with connection.cursor() as cursor:
-#     #     cursor.execute(
-#     #         """CREATE TABLE users(
-#     #             id serial PRIMARY KEY,
-#     #             first_name varchar(50) NOT NULL,
-#     #             nick_name varchar(50) NOT NULL);"""
-#     #     )
-        
-#     #     # connection.commit()
-#     #     print("[INFO] Table created successfully")
-        
-#     # insert data into a table
-#     # with connection.cursor() as cursor:
-#     #     cursor.execute(
-#     #         """INSERT INTO users (first_name, nick_name) VALUES
-#     #         ('Oleg', 'barracuda');"""
-#     #     )
-        
-#     #     print("[INFO] Data was succefully inserted")
-        
-#     # get data from a table
-#     # with connection.cursor() as cursor:
-#     #     cursor.execute(
-#     #         """SELECT nick_name FROM users WHERE first_name = 'Oleg';"""
-#     #     )
-        
-#     #     print(cursor.fetchone())
-        
-#     # delete a table
-#     # with connection.cursor() as cursor:
-#     #     cursor.execute(
-#     #         """DROP TABLE users;"""
-#     #     )
-        
-#     #     print("[INFO] Table was deleted")
-    
-# except Exception as _ex:
-#     print("[INFO] Error while working with PostgreSQL", _ex)
-# finally:
-#     if connection:
-#         # cursor.close()
-#         connection.close()
-#         print("[INFO] PostgreSQL connection closed")
+    def test_lang_text(self):
+        # Mock the database connection and cursor
+        mock_cursor = MagicMock()
+        mock_cursor.fetchall.return_value = [('Instruction value',)]
+        mock_connection = MagicMock()
+        mock_connection.cursor.return_value = mock_cursor
+        self.result_text.connection = mock_connection
+
+        # Mock the get_user_language method
+        self.result_text.get_user_language = MagicMock(return_value='en')
+
+        # Call the lang_text method
+        result = self.result_text.lang_text()
+
+        # Assertions
+        self.assertEqual(result, 'Instruction value')
+        mock_connection.cursor.assert_called_once()
+        mock_cursor.execute.assert_called_once()
+        mock_cursor.fetchall.assert_called_once()
+        self.result_text.get_user_language.assert_called_once()
+
+    def test_get_user_language(self):
+        # Mock the database connection and cursor
+        mock_cursor = MagicMock()
+        mock_cursor.fetchall.return_value = [('en',)]
+        mock_connection = MagicMock()
+        mock_connection.cursor.return_value = mock_cursor
+        self.result_text.connection = mock_connection
+
+        # Call the get_user_language method
+        result = self.result_text.get_user_language()
+
+        # Assertions
+        self.assertEqual(result, 'en')
+        mock_connection.cursor.assert_called_once()
+        mock_cursor.execute.assert_called_once()
+        mock_cursor.fetchall.assert_called_once()
+
+if __name__ == '__main__':
+    unittest.main()
