@@ -1,5 +1,5 @@
 # Libraries Imported
-from bot_create import token
+from config import token
 
 class Bard_create: 
     def __init__(self, message: str): # The Bard_create class is an instance of the Bard language model. It has a constructor (__init__) that takes a message parameter.

@@ -1,7 +1,7 @@
 # Libraries Imported
 import datetime
 import psycopg2
-from bot_create import connect
+from config import connect
 
 # This class is responsible for establishing a connection to the PostgreSQL database using the provided connection details.
 class Sql_connect:

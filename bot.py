@@ -1,7 +1,7 @@
 # Libraries Imported
 from aiogram import executor, types 
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ContentTypes, InlineKeyboardMarkup, InlineKeyboardButton
-from bot_create import dp, bot, welcome_message, ADMIN
+from config import dp, bot, welcome_message, ADMIN
 from bard_create import Bard_create
 from sql_data import Sql_data, Conclusion, User_language, ResultText as a
 
