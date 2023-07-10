@@ -75,7 +75,7 @@ class Conclusion(SqlConnect):
             for_me = []
             for row in mobile_records:
                 for_me.append(row)
-            return for_me[0]
+            return for_me
 
         except (psycopg2.Error) as error:
             print("[INFO] Error while working with PostgreSQL:", error)
