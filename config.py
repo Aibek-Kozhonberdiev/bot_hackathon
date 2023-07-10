@@ -7,8 +7,8 @@ load_dotenv()
 
 telegram_key = os.getenv('API_KEY') # Stores the API key for the Telegram bot.
 ADMIN = os.getenv('ADMIN') # Stores the admin username or ID for the bot.
-token = os.getenv("API_BARD") # Stores the API key for an external service called "Bard".
-connect = { # Stores a dictionary of database connection details, including the host, user, password, and database name.
+TOKEN = os.getenv("API_BARD") # Stores the API key for an external service called "Bard".
+CONNECT = { # Stores a dictionary of database connection details, including the host, user, password, and database name.
     "host": os.getenv('host'),
     "user": os.getenv('user'),
     "password": os.getenv('password'),

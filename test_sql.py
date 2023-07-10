@@ -1,12 +1,12 @@
 import psycopg2
-from config import connect
+from config import CONNECT
 
 # Database connection
 conn = psycopg2.connect(
-    host=connect['host'],
-    user=connect['user'],
-    password=connect['password'],
-    database=connect['database']   
+    host=CONNECT['host'],
+    user=CONNECT['user'],
+    password=CONNECT['password'],
+    database=CONNECT['database']   
 )
 
 # Perform database operations

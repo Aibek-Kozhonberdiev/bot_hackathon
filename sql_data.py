@@ -1,20 +1,18 @@
 # Libraries Imported
 import datetime
 import psycopg2
-from config import connect
+from config import CONNECT
 
-# This class is responsible for establishing a connection to the PostgreSQL database using the provided connection details.
-class Sql_connect:
+class SqlConnect:
     def __init__(self):
         self.connection = psycopg2.connect(
-            host=connect['host'],
-            user=connect['user'],
-            password=connect['password'],
-            database=connect['database']   
+            host=CONNECT['host'],
+            user=CONNECT['user'],
+            password=CONNECT['password'],
+            database=CONNECT['database']   
         )
 
-# It retrieves the user's information from the message object and inserts it into the users table in the database.
-class Sql_data(Sql_connect):
+class SqlData(SqlConnect):
     def __init__(self, message):
         super().__init__()  # Calling the constructor of the outgoing class
         self.date = datetime.datetime.now().date()
@@ -22,7 +20,7 @@ class Sql_data(Sql_connect):
         self.last_name = message.from_user.last_name
         self.id_telegram = message.from_user.id
     
-    def insert_users(self):
+    async def insert_users(self):
         try:
             self.connection.autocommit = True
             with self.connection.cursor() as cursor:
@@ -38,14 +36,13 @@ class Sql_data(Sql_connect):
                 self.connection.close()
                 print("[INFO] PostgreSQL connection closed")
                 
-# It updates the user language field in the users table for a specific user identified by their user_id.
-class User_language(Sql_connect):
+class UserLanguage(SqlConnect):
     def __init__(self, user_id: str, new_language: str):
         super().__init__() # Calling the constructor of the outgoing class
         self.user_id = user_id
         self.new_language = new_language
 
-    def change_user_language(self):
+    async def change_user_language(self):
         try:
             cursor = self.connection.cursor()
 
@@ -65,9 +62,8 @@ class User_language(Sql_connect):
                 self.connection.close()
                 print("PostgreSQL connection closed")
 
-# It retrieves all records from the users table and returns the formatted result.
-class Conclusion(Sql_connect): # Calling the constructor of the outgoing class
-    def result(self):
+class Conclusion(SqlConnect): 
+    async def admin(self):
         try:
             cursor = self.connection.cursor()
             postgreSQL_select_Query = "SELECT * FROM users"
@@ -89,16 +85,15 @@ class Conclusion(Sql_connect): # Calling the constructor of the outgoing class
                 self.connection.close()
                 print("[INFO] PostgreSQL connection closed") 
         
-# It retrieves the user's preferred language from the users table and fetches the corresponding translated text .
-class ResultText(Sql_connect):
+class ResultText(SqlConnect):
     def __init__(self, user_id: int, text: str):
         super().__init__() # Calling the constructor of the outgoing class
         self.user_id = user_id
         self.text = text
 
-    def lang_text(self):
+    async def lang_text(self):
         try:
-            lang = self.get_user_language()
+            lang = await self.get_user_language()
             cursor = self.connection.cursor()
             postgreSQL_select_Query = f"""
             SELECT value
@@ -121,7 +116,7 @@ class ResultText(Sql_connect):
                 self.connection.close()
                 print("[INFO] PostgreSQL connection closed")
 
-    def get_user_language(self):
+    async def get_user_language(self):
         try:
             cursor = self.connection.cursor()
             postgreSQL_select_Query = f"""
@@ -141,3 +136,23 @@ class ResultText(Sql_connect):
         finally:
             if cursor:
                 cursor.close()
+
+async def sqldata(message):
+    creator = SqlData(message)
+    response = await creator.insert_users()
+    return response
+
+async def userlanguage(user_id: str, new_language: str):
+    creator = UserLanguage(user_id, new_language)
+    response = await creator.change_user_language()
+    return response
+
+async def conclusion():
+    creator = Conclusion()
+    response = await creator.admin()
+    return response
+
+async def resulttext(user_id: int, text: str):
+    creator = ResultText(user_id, text)
+    response = await creator.lang_text()
+    return response

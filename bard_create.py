@@ -1,10 +1,17 @@
-# Libraries Imported
-from config import token
+import asyncio
+from bardapi import Bard
+from config import TOKEN
 
-class Bard_create: 
-    def __init__(self, message: str): # The Bard_create class is an instance of the Bard language model. It has a constructor (__init__) that takes a message parameter.
+class BardСhat:
+    def __init__(self, message: str):
         self.message = message
-    def chat(self): # The chat() method is used to interact with the Bard model and retrieve its response based on the provided message. It utilizes the Bard class from the bardapi module.
-        from bardapi import Bard
-        Bard = Bard(token=token)
-        return Bard.get_answer(f"{self.message}")['content']
+
+    async def chat(self):
+        bard = Bard(token=TOKEN)
+        response = await asyncio.to_thread(bard.get_answer, self.message)
+        return response['content']
+
+async def bard_chat(message) -> str:
+    creator = BardСhat(message)
+    response = await creator.chat()
+    return response
