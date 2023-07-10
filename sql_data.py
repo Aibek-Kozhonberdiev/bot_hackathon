@@ -74,7 +74,7 @@ class Conclusion(SqlConnect):
             print("[INFO] Output of each article and its columns")
             for_me = []
             for row in mobile_records:
-                for_me.append(f"Id: {row[0]}, first_name: {row[1]}, last_name: {row[2]}, id_telegram: {row[3]}, date: {row[4]}")
+                for_me.append(row)
             return for_me[0]
 
         except (psycopg2.Error) as error:
