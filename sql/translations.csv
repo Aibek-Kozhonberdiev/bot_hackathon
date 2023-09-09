@@ -1,0 +1,63 @@
+"id","language_code","key","value"
+1,"en","help","🤖/start - Welcome🤖
+📥/help - teams📥
+🆘/instruction - instruction🆘
+🌐/language - language🌐"
+2,"en","loading","⌛️The request will take some time to process.⌛️"
+3,"en","error","💤The bot does not process such a message!💤"
+4,"ru","help","🤖/start - Добро пожаловать🤖
+📥/help - команды📥
+🆘/instruction - инструкция🆘
+🌐/language - язык🌐"
+5,"ru","loading","⌛️Обработка запроса займет некоторое время.⌛️"
+6,"ru","error","💤Бот не обрабатывает такое сообщение!💤"
+7,"kg","help","🤖/start - Кош келиңиз🤖
+📥/help - командалар📥
+🆘/instruction - инструкция🆘
+🌐/language - тил🌐"
+8,"kg","loading","⌛️Өтүнүчтү иштетүү үчүн бир аз убакыт талап кылынат.⌛️"
+9,"kg","error","💤Бот мындай билдирүүнү иштетпейт!💤"
+10,"kg","instruction","Ким ➡️ 🙋‍♂️ Сизге керектүү ролду дайындайт. Мугалим, иштеп чыгуучу, ашпозчу жана башкалар сыяктуу рол.
+Эмне ➡️ 🔬 Модель жасоону каалаган аракетиңизди билдирет.
+Качан ➡️ 🕑 Белгилүү бир тапшырманы аткаруу үчүн сиз каалаган убакыт тилкеси.
+Кайда ➡️ 📍 Белгилүү бир эскертүүнүн жайгашкан жерин же контекстти билдирет.
+Эмне үчүн ➡️ 🤔 Белгилүү бир билдирүүнүн себептерин, мотивацияларын же максаттарын билдирет."
+11,"ru","instruction","Кто ➡️ 🙋‍♂️ Назначает ту роль, которую вам нужна модель. Роль учителя, разработчика, шеф-повара и так далее.
+Что ➡️ 🔬 Относится к действию, которое вы хотите, чтобы модель выполнила.
+Когда ➡️ 🕑 Желаемый срок для выполнения конкретной задачи.
+Где ➡️ 📍 Относится к местоположению или контексту конкретной подсказки.
+Почему ➡️ 🤔 Относится к причинам, мотивам или целям конкретной подсказки."
+12,"en","instruction","Who   ➡️ 🙋‍♂️ Assigns the role you need the model to play. A role like a teacher, developer, chef, and so on. 
+What  ➡️ 🔬 Refers to the action you want the model to do. 
+When  ➡️ 🕑 Your desired timeline to complete a particular task. 
+Where ➡️ 📍 Refers to the location or context of a particular prompt. 
+Why   ➡️ 🤔 Refers to the reasons, motivations, or goals for a particular prompt."
+13,"en","Choose","🌐Choose language:🌐"
+14,"ru","Choose","🌐Выберите язык:🌐"
+15,"kg","Choose","🌐Тилди тандоо:🌐"
+16,"en","welcome","
+Bard is a large language model from Google AI, trained on a massive dataset of text and code. I can generate text, translate languages, write different kinds of creative content, and answer your questions in an informative way. I am still under development, but I have learned to perform many kinds of tasks, including:
+
+🤖 Following instructions and completing requests thoughtfully.
+📚 Answering questions in a comprehensive and informative way, even if they are open ended, challenging, or strange.
+🎭 Generating different creative text formats, like poems, code, scripts, musical pieces, email, letters, etc.
+I am a helpful and informative bot that can be used for a variety of purposes. I can be used to:
+
+🏖️ Provide summaries of factual topics.
+👫 Create stories.
+🌎 Translate languages.
+✍️ Write different kinds of creative content.
+❓ Answer your questions in an informative way.
+I am still under development, but I am learning new things every day. I am excited to see what the future holds for me, and I am eager to help people in any way that I can.
+
+Here are some words that I would use to describe myself:
+
+💡 Intelligent
+💡 Creative
+🤔 Curious
+🤖 Helpful
+ℹ️ Informative
+🕵️ Eager to learn
+I hope you will find me to be a helpful and informative bot. 😊
+
+I hope you like the emojis!"

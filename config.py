@@ -1,24 +1,23 @@
-# Libraries Imported
 import os
 from aiogram import Bot, Dispatcher
 from dotenv import load_dotenv
 
 load_dotenv()
 
-telegram_key = os.getenv('API_KEY') # Stores the API key for the Telegram bot.
-ADMIN = os.getenv('ADMIN') # Stores the admin username or ID for the bot.
-TOKEN = os.getenv("API_BARD") # Stores the API key for an external service called "Bard".
-CONNECT = { # Stores a dictionary of database connection details, including the host, user, password, and database name.
+telegram_key = os.getenv('API_KEY')
+ADMIN = os.getenv('ADMIN')
+TOKEN = os.getenv("API_BARD")
+CONNECT = {
     "host": os.getenv('host'),
     "user": os.getenv('user'),
     "password": os.getenv('password'),
     "database": os.getenv('db_name') 
 }
 
-bot = Bot(token=telegram_key) # Bot Initialization
-dp = Dispatcher(bot) # Dispatcher Initialization
+bot = Bot(token=telegram_key)
+dp = Dispatcher(bot)
 
-# Welcome Message
+
 welcome_message = """ 
 Bard is a large language model from Google AI, trained on a massive dataset of text and code. I can generate text, translate languages, write different kinds of creative content, and answer your questions in an informative way. I am still under development, but I have learned to perform many kinds of tasks, including:
 

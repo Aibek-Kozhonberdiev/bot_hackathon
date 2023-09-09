@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from sql_data import ResultText
+from sql.sql_data import ResultText
 
 class ResultTextTest(unittest.TestCase):
     def setUp(self):
